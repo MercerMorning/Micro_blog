@@ -1,29 +1,29 @@
 <?php
 $allMesages = $data;
-print_r($allMesages);
 ?>
 
-<form action="message" method="post">
-        <label for="text"><b>Message</b></label>
-        <label>
-            <input type="text" placeholder="Enter Text" name="text" required>
-        </label>
-        <input name="userfile" type="file" /><br>
-        <button type="submit" class="registerbtn">Send</button>
+<form enctype="multipart/form-data" action="message" method="post">
+    <label for="text"><b>Message</b></label>
+    <label>
+        <input type="text" placeholder="Enter Text" name="text" required>
+    </label>
+    <label>
+        <input name="userfile" type="file"/><br>
+    </label>
+    <button type="submit" class="registerbtn">Send</button>
 </form>
 
 <ul>
-    <? foreach ($allMesages as $message => $inf):?>
+    <? foreach ($allMesages as $message => $inf): ?>
         <li>
-            <pre><?= $inf["text"]?></pre>
-            <pre><?= $inf["date"]?></pre>
-            <pre><?= $inf["user_id"]?></pre>
-            <? if (file_exists(__DIR__ . "../../../images/" . $inf["id"] . ".jpg")):?>
-<!--                <img src="--><?//=__DIR__?><!--../../../../image.php/?id=--><?//=$inf["id"];?><!--" alt="image">-->
-            <img src=<?__DIR__ . "../../../../images/" . $this->getLastInsertID() . ".jpg"?>>
+            <pre><?= strip_tags($inf["text"]) ?></pre>
+            <pre><?= $inf["date"] ?></pre>
+            <pre><?= $inf["name"] ?></pre>
+            <? if (file_exists(PROJECT_PATH . "/images/" . $inf["id"] . ".jpg")): ?>
+                <img src="<?= PROJECT_PATH . "/images/" . $inf["id"] . ".jpg" ?>" alt="pic">
             <? endif; ?>
         </li>
-    <? endforeach;?>
+    <? endforeach; ?>
 </ul>
 
 <style>

@@ -11,6 +11,10 @@ class Base
      */
     protected static $pdo;
 
+    /**
+     * Подключение к базе данных
+     * @return \PDO
+     */
     protected function getConnect()
     {
         if (self::$pdo === null) {
@@ -21,12 +25,17 @@ class Base
         return self::$pdo;
     }
 
+    /**
+     * Получение юзера из сессии
+     * @return mixed
+     */
     public function user()
     {
         return $_SESSION[self::SESSION_INDEX_USER];
     }
 
     /**
+     * Проверка логина
      * @return bool
      */
     public function quest()
@@ -35,6 +44,7 @@ class Base
     }
 
     /**
+     * Установка пользователя в сессию
      * @param array $user
      */
     public function login(array $user)
@@ -43,7 +53,7 @@ class Base
     }
 
     /**
-     *
+     * Удаление пользователя из сессии
      */
     public function logout()
     {

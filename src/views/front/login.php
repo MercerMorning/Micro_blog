@@ -1,3 +1,6 @@
+<?php
+$statusLog = $data["log"];
+?>
 <form action="login" method="post">
     <div class="container">
         <h1>Login</h1>
@@ -10,6 +13,7 @@
         <input type="password" placeholder="Enter Password" name="password" required>
 
         <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-        <button type="submit" class="registerbtn">Register</button>
+        <button type="submit" class="registerbtn">Log in</button>
     </div>
 </form>
+<?= $statusLog ?>
