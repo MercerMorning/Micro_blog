@@ -1,16 +1,28 @@
 <?php
+
 namespace App\Controllers;
 
-class AdminController
-{
-    public function index()
-    {
-        var_dump('Это закрытая часть!');
-    }
+use App\Models\Message;
 
-    public function register()
+class AdminController extends BaseController
+{
+    public function message()
     {
-        var_dump('Это регистрация!');
+        $messageModel = new Message();
+        if (!$messageModel->quest()) {
+            $message = $messageModel->user();
+            $allMessages = $messageModel->getAllMessages();
+            $isAddMessage = $messageModel->addMessage($message, $_POST["text"]);
+            $isDelMessage = $messageModel->deleteMessage(key($_GET));
+            if (!empty($_FILES["userfile"]["tmp_name"])) {
+                $messageModel->setImageToMessage($_FILES["userfile"]["tmp_name"]);
+            }
+            if ($isAddMessage || $isDelMessage) {
+                header("Location: http://hmmvc/admin/message");
+            }
+            $this->render('front\messageAdmin', $allMessages);
+        }
+        return 0;
     }
 
 }

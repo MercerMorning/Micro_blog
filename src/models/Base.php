@@ -4,13 +4,16 @@ namespace App\Models;
 
 class Base
 {
-    const SESSION_INDEX_USER = 'user';
-
+    
     /**
      * @var \PDO
      */
     protected static $pdo;
 
+    /**
+     * Подключение к базе данных
+     * @return \PDO
+     */
     protected function getConnect()
     {
         if (self::$pdo === null) {
@@ -19,34 +22,5 @@ class Base
             );
         }
         return self::$pdo;
-    }
-
-    public function user()
-    {
-        return $_SESSION[self::SESSION_INDEX_USER];
-    }
-
-    /**
-     * @return bool
-     */
-    public function quest()
-    {
-        return empty($_SESSION[self::SESSION_INDEX_USER]);
-    }
-
-    /**
-     * @param array $user
-     */
-    public function login(array $user)
-    {
-        $_SESSION[self::SESSION_INDEX_USER] = $user;
-    }
-
-    /**
-     *
-     */
-    public function logout()
-    {
-        $_SESSION[self::SESSION_INDEX_USER] = null;
     }
 }

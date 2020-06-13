@@ -1,5 +1,6 @@
 <?php
-$allErrors = $data;
+$allErrors = $data["error"];
+$result = $data["result"];
 ?>
 <form action="register" method="post">
     <div class="container">
@@ -20,20 +21,15 @@ $allErrors = $data;
         <label for="psw-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="password-repeat" required>
         <hr>
-
-        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
         <button type="submit" class="registerbtn">Register</button>
     </div>
-
-    <div class="container signin">
-        <p>Already have an account? <a href="#">Sign in</a>.</p>
-    </div>
-
+    <pre><?= $data["result"] ?></pre>
     <ul>
-        <? foreach ($allErrors as $error):?>
+        <? foreach ($allErrors as $error): ?>
             <li>
-                <?=$error[0];?>
+                <?= $error ?>
             </li>
-        <? endforeach;?>
+        <? endforeach; ?>
     </ul>
+    <a href="../user/login">Auth</a>
 </form>
